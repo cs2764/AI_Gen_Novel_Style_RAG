@@ -69,7 +69,11 @@ Before usage, you need to configure models and API keys:
 
 ### 🚀 Quick Start
 
-#### Python API
+#### 1. Prepare Data
+
+Place your novel text files (.txt or .md) into the `input/` directory.
+
+#### 2. Python API
 
 ```python
 from style_rag import StyleRAGClient
@@ -179,7 +183,11 @@ pip install -r requirements.txt
 
 ### 🚀 快速开始 (Quick Start)
 
-#### Python API
+#### 1. 准备数据
+
+将你的小说文本文件（.txt 或 .md）放入 `input/` 目录中。
+
+#### 2. Python API
 
 ```python
 from style_rag import StyleRAGClient
