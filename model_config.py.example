@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+"""
+Style-RAG 模型配置文件模板
+Model Configuration File Template
+
+复制此文件为 model_config.py 并填入你的API密钥。
+Copy this file to model_config.py and fill in your API keys.
+"""
+
+# 默认配置
+DEFAULT_INPUT = "./input"
+DEFAULT_DB = "./rag_index"
+DEFAULT_EXPORTS = "./exports"
+
+# ============== 嵌入模型配置 (创建索引使用) / Indexing Model Config ==============
+# 注意：这里配置的模型用于创建索引。API服务使用独立的配置（在下方）。
+# Note: This config is for creating indexes. API server uses separate config (below).
+# 可选值 / Options: "lm_studio", "openrouter", "siliconflow", "local_gguf", "local"
+# - lm_studio: 使用LM Studio部署的嵌入模型 (推荐本地使用)
+# - openrouter: 使用OpenRouter API (推荐云端，支持多并发)
+# - siliconflow: 使用SiliconFlow API (国内推荐，支持多并发)
+# - local_gguf: 使用本地GGUF量化模型 (需要llama-cpp-python)
+# - local: 使用sentence-transformers模型
+EMBEDDING_PROVIDER = "lm_studio"
+#EMBEDDING_PROVIDER = "openrouter"
+#EMBEDDING_PROVIDER = "siliconflow"
+
+# -------------- LM Studio 配置 --------------
+# LM Studio API地址 (默认端口1234)
+LM_STUDIO_URL = "http://localhost:1234/v1"
+# LM Studio中加载的嵌入模型名称 (在LM Studio界面中查看)
+LM_STUDIO_MODEL = "text-embedding-qwen3-embedding-4b"
+
+
+# -------------- OpenRouter 配置 --------------
+# OpenRouter API密钥 (从 https://openrouter.ai/keys 获取)
+OPENROUTER_API_KEY = "sk-xxxxxxxx"  # 填入你的API密钥
+# 嵌入模型名称 (格式: provider/model-name)
+OPENROUTER_MODEL = "baai/bge-m3"
+# 最大并发请求数 (提高处理速度)
+OPENROUTER_MAX_CONCURRENCY = 20
+
+# -------------- SiliconFlow 配置 --------------
+# SiliconFlow API密钥 (从 https://cloud.siliconflow.cn 获取)
+SILICONFLOW_API_KEY = "sk-xxxxxxxx"  # 填入你的API密钥
+# 嵌入模型名称
+SILICONFLOW_MODEL = "BAAI/bge-m3"
+# 最大并发请求数
+SILICONFLOW_MAX_CONCURRENCY = 20
+
+# -------------- GGUF 模型配置 --------------
+# GGUF模型文件路径（相对于项目根目录）
+# 下载地址: https://huggingface.co/Qwen/Qwen3-Embedding-4B-GGUF
+GGUF_MODEL_PATH = "./models/Qwen3-Embedding-4B-Q8_0.gguf"
+# GPU卸载层数: -1=全部到GPU, 0=纯CPU, 其他数字=指定层数
+GGUF_N_GPU_LAYERS = -1
+
+# -------------- 通用配置 --------------
+# 每次API调用发送的文本数量 (降低可避免token超限，增加可提高效率)
+EMBEDDING_BATCH_SIZE = 60
+# =============================================================================
+
+# ============== API服务模型配置 / API Server Model Config ==============
+# 独立配置API服务使用的模型，可以与创建索引使用的模型不同
+# Separate configuration for API server, can be different from indexing model
+
+# 可选值: "lm_studio", "openrouter", "siliconflow", "local_gguf", "local"
+API_EMBEDDING_PROVIDER = "lm_studio"
+
+# --- API: LM Studio ---
+API_LM_STUDIO_URL = "http://localhost:1234/v1"
+API_LM_STUDIO_MODEL = "text-embedding-qwen3-embedding-4b"
+
+# --- API: OpenRouter ---
+API_OPENROUTER_API_KEY = "sk-xxxxxxxx"
+API_OPENROUTER_MODEL = "baai/bge-m3"
+API_OPENROUTER_MAX_CONCURRENCY = 20
+
+# --- API: SiliconFlow ---
+API_SILICONFLOW_API_KEY = "sk-xxxxxxxx"
+API_SILICONFLOW_MODEL = "BAAI/bge-m3"
+API_SILICONFLOW_MAX_CONCURRENCY = 20
+
+# --- API: GGUF ---
+API_GGUF_MODEL_PATH = "./models/Qwen3-Embedding-4B-Q8_0.gguf"
+API_GGUF_N_GPU_LAYERS = -1
+
+# --- API: Common ---
+API_EMBEDDING_BATCH_SIZE = 60
+# 默认搜索结果数量
+API_SEARCH_TOP_K = 10
+
+# =============================================================================

@@ -1,0 +1,27 @@
+# Style-RAG 依赖清单 / Dependencies
+# 使用 uv pip install -r requirements.txt 安装
+
+# 核心依赖 / Core Dependencies
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+openai>=1.0.0
+numpy>=1.24.0
+pydantic>=2.0.0
+
+# GGUF本地嵌入 / GGUF Local Embedding (optional)
+# 安装CPU版本: uv pip install llama-cpp-python
+# 安装GPU版本 (CUDA): 
+#   set CMAKE_ARGS="-DGGML_CUDA=on"
+#   uv pip install llama-cpp-python --force-reinstall --no-cache-dir
+# llama-cpp-python>=0.2.0
+
+# HTTP服务 / HTTP Server (optional)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# 重排序模型 / Reranker (optional)
+# FlagEmbedding>=1.2.0
+
+# 开发依赖 / Development (optional)
+# pytest>=7.0.0
+# pytest-cov>=4.0.0

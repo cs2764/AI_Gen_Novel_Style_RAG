@@ -1,0 +1,11 @@
+model_config.py
+__pycache__/
+rag_index/
+exports/
+*.pyc
+.env
+.venv/
+.DS_Store
+models/
+rag_index - 副本/
+input/
