@@ -63,11 +63,46 @@ def main():
     print(f"\n按 Ctrl+C 停止服务\n")
     
     try:
+        # 加载配置
+        sys.path.append(os.getcwd())
+        try:
+            from model_config import (
+                API_EMBEDDING_PROVIDER,
+                API_EMBEDDING_BATCH_SIZE,
+                API_SEARCH_TOP_K,
+                API_LM_STUDIO_URL, API_LM_STUDIO_MODEL,
+                API_OPENROUTER_API_KEY, API_OPENROUTER_MODEL, API_OPENROUTER_MAX_CONCURRENCY,
+                API_SILICONFLOW_API_KEY, API_SILICONFLOW_MODEL, API_SILICONFLOW_MAX_CONCURRENCY,
+                API_GGUF_MODEL_PATH, API_GGUF_N_GPU_LAYERS
+            )
+        except ImportError:
+            print("❌ 未找到配置文件 model_config.py")
+            print("   请从 model_config.py.example 复制并创建 model_config.py")
+            sys.exit(1)
+
         import uvicorn
         
-        # 设置环境变量传递配置
-        import os
+        # 设置基本环境变量
         os.environ['STYLE_RAG_DB_PATH'] = args.db
+        os.environ['STYLE_RAG_EMBEDDING_PROVIDER'] = API_EMBEDDING_PROVIDER
+        os.environ['STYLE_RAG_EMBEDDING_BATCH_SIZE'] = str(API_EMBEDDING_BATCH_SIZE)
+        os.environ['STYLE_RAG_SEARCH_TOP_K'] = str(API_SEARCH_TOP_K)
+        
+        # 根据Provider设置特定环境变量
+        if API_EMBEDDING_PROVIDER == "lm_studio":
+            os.environ['STYLE_RAG_LM_STUDIO_URL'] = API_LM_STUDIO_URL
+            os.environ['STYLE_RAG_LM_STUDIO_MODEL'] = API_LM_STUDIO_MODEL
+        elif API_EMBEDDING_PROVIDER == "openrouter":
+            os.environ['STYLE_RAG_OPENROUTER_API_KEY'] = API_OPENROUTER_API_KEY
+            os.environ['STYLE_RAG_OPENROUTER_MODEL'] = API_OPENROUTER_MODEL
+            os.environ['STYLE_RAG_MAX_CONCURRENCY'] = str(API_OPENROUTER_MAX_CONCURRENCY)
+        elif API_EMBEDDING_PROVIDER == "siliconflow":
+            os.environ['STYLE_RAG_SILICONFLOW_API_KEY'] = API_SILICONFLOW_API_KEY
+            os.environ['STYLE_RAG_SILICONFLOW_MODEL'] = API_SILICONFLOW_MODEL
+            os.environ['STYLE_RAG_MAX_CONCURRENCY'] = str(API_SILICONFLOW_MAX_CONCURRENCY)
+        elif API_EMBEDDING_PROVIDER == "local_gguf":
+            os.environ['STYLE_RAG_GGUF_MODEL_PATH'] = API_GGUF_MODEL_PATH
+            os.environ['STYLE_RAG_GGUF_N_GPU_LAYERS'] = str(API_GGUF_N_GPU_LAYERS)
         
         uvicorn.run(
             "style_rag.api.server:app",
@@ -76,9 +111,12 @@ def main():
             reload=args.reload,
             log_level="info"
         )
-    except ImportError:
-        print("❌ 需要安装 uvicorn:")
-        print("   uv pip install uvicorn")
+    except ImportError as e:
+        if "model_config" in str(e):
+             print("❌ 导入配置失败")
+        else:
+             print("❌ 需要安装 uvicorn:")
+             print("   uv pip install uvicorn")
         sys.exit(1)
     except KeyboardInterrupt:
         print("\n\n服务已停止")

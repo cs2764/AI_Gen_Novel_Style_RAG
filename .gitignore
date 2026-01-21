@@ -7,5 +7,5 @@ exports/
 .venv/
 .DS_Store
 models/
-rag_index - 副本/
+rag_index copy/
 input/

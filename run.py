@@ -536,8 +536,8 @@ def run_test():
                 break
             
             # 询问返回数量
-            top_k = input("  返回结果数量 [默认5]: ").strip()
-            top_k = int(top_k) if top_k.isdigit() else 5
+            top_k = input(f"  返回结果数量 [默认{API_SEARCH_TOP_K}]: ").strip()
+            top_k = int(top_k) if top_k.isdigit() else API_SEARCH_TOP_K
             
             results = client.search(query, top_k=top_k, min_similarity=0.3)
             
