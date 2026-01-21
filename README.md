@@ -27,7 +27,7 @@
 - 📊 **Progress Tracking**: Detailed file-level progress display during indexing.
 - 📜 **Full Results**: Retrieval tests display full, untruncated content.
 
-### 🆕 Update Log (v3.12.0)
+### 🆕 Update Log (v0.1.0)
 
 - **Configuration Separation**: Sensitive configurations (like API Keys) are now stored in `model_config.py`.
 - **Retrieval Optimization**: `run_test` no longer truncates long text in search results.
@@ -141,7 +141,7 @@ python -m style_rag.cli.query \
 - 📊 **进度追踪** - 索引构建时显示详细的文件级进度
 - 📜 **完整结果** - 检索测试显示无截断的完整内容
 
-### 🆕 更新日志 (v3.12.0)
+### 🆕 更新日志 (v0.1.0)
 
 - **配置分离**: 敏感配置（如 API Key）现在存储在 `model_config.py` 中，不再硬编码在 `run.py`。
 - **检索优化**: `run_test` 检索测试不再截断长文本，便于完整查看检索效果。

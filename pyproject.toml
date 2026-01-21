@@ -1,6 +1,6 @@
 [project]
 name = "style-rag"
-version = "3.12.0"
+version = "0.1.0"
 description = "独立RAG系统 - 用于风格学习和创作优化 / Independent RAG System for Style Learning and Creative Enhancement"
 readme = "README.md"
 requires-python = ">=3.9"
