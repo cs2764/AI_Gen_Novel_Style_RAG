@@ -27,7 +27,12 @@
 - 📊 **Progress Tracking**: Detailed file-level progress display during indexing.
 - 📜 **Full Results**: Retrieval tests display full, untruncated content.
 
-### 🆕 Update Log (v0.1.0)
+### 🆕 Update Log (v0.1.1 - 2026-03-25)
+
+- **Cross-Platform Compatibility**: Standardized line endings (CRLF to LF) across the entire codebase to improve compatibility across Windows, Linux, and macOS environments.
+- **Improved Ignored Files**: Updated `.gitignore` to better handle massive RAG index backups and archives, preventing accidental commits of redundant user data.
+
+### 📜 Previous Updates (v0.1.0)
 
 - **Configuration Separation**: Sensitive configurations (like API Keys) are now stored in `model_config.py`.
 - **Retrieval Optimization**: `run_test` no longer truncates long text in search results.
@@ -141,7 +146,12 @@ python -m style_rag.cli.query \
 - 📊 **进度追踪** - 索引构建时显示详细的文件级进度
 - 📜 **完整结果** - 检索测试显示无截断的完整内容
 
-### 🆕 更新日志 (v0.1.0)
+### 🆕 更新日志 (v0.1.1 - 2026-03-25)
+
+- **跨平台兼容性优化**: 统一了整个代码库的换行符格式（从 CRLF 转换为 LF），提升了在 Windows、Linux 和 macOS 环境下运行的兼容性。
+- **Git 忽略规则完善**: 更新了 `.gitignore`，更好地排除庞大的 RAG 索引备份和归档文件，防止冗余的用户个人数据被意外提交。
+
+### 📜 历史更新 (v0.1.0)
 
 - **配置分离**: 敏感配置（如 API Key）现在存储在 `model_config.py` 中，不再硬编码在 `run.py`。
 - **检索优化**: `run_test` 检索测试不再截断长文本，便于完整查看检索效果。

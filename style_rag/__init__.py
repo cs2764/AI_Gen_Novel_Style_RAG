@@ -13,7 +13,7 @@ from style_rag.api.client import StyleRAGClient
 from style_rag.core.embedding_config import EmbeddingConfig, EmbeddingProvider
 from style_rag.core.config import RAGConfig
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = [
     "StyleRAGClient",
     "EmbeddingConfig",
